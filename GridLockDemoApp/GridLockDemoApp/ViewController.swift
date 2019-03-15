@@ -13,6 +13,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = .red
+        
+        let button = UIButton(frame: .zero)
+        button.setTitle("Hello World", for: .normal)
+        button.addTarget(self, action: #selector(self.buttonPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(button)
+        
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+            ])
+    }
+    
+    @objc func buttonPressed(sender: UIButton) {
+        print("hello world")
     }
 
 

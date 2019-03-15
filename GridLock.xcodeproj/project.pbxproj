@@ -10,6 +10,8 @@
 		29C6CF7E223C002A00FC321B /* GridLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C6CF74223C002A00FC321B /* GridLock.framework */; };
 		29C6CF83223C002A00FC321B /* GridLockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C6CF82223C002A00FC321B /* GridLockTests.swift */; };
 		29C6CF85223C002B00FC321B /* GridLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 29C6CF77223C002A00FC321B /* GridLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29C6CFD2223C0B9400FC321B /* GridLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C6CFD1223C0B9400FC321B /* GridLock.swift */; };
+		29C6CFD7223C0FD200FC321B /* GridLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C6CFD6223C0FD200FC321B /* GridLockViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +31,8 @@
 		29C6CF7D223C002A00FC321B /* GridLockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridLockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		29C6CF82223C002A00FC321B /* GridLockTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLockTests.swift; sourceTree = "<group>"; };
 		29C6CF84223C002B00FC321B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29C6CFD1223C0B9400FC321B /* GridLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLock.swift; sourceTree = "<group>"; };
+		29C6CFD6223C0FD200FC321B /* GridLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLockViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +75,9 @@
 		29C6CF76223C002A00FC321B /* GridLock */ = {
 			isa = PBXGroup;
 			children = (
-				29C6CF77223C002A00FC321B /* GridLock.h */,
-				29C6CF78223C002A00FC321B /* Info.plist */,
+				29C6CFD1223C0B9400FC321B /* GridLock.swift */,
+				29C6CFD6223C0FD200FC321B /* GridLockViewController.swift */,
+				29C6CFD0223C0B6C00FC321B /* Resources */,
 			);
 			path = GridLock;
 			sourceTree = "<group>";
@@ -84,6 +89,15 @@
 				29C6CF84223C002B00FC321B /* Info.plist */,
 			);
 			path = GridLockTests;
+			sourceTree = "<group>";
+		};
+		29C6CFD0223C0B6C00FC321B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				29C6CF77223C002A00FC321B /* GridLock.h */,
+				29C6CF78223C002A00FC321B /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +162,7 @@
 				TargetAttributes = {
 					29C6CF73223C002A00FC321B = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					29C6CF7C223C002A00FC321B = {
 						CreatedOnToolsVersion = 10.1;
@@ -194,6 +209,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29C6CFD2223C0B9400FC321B /* GridLock.swift in Sources */,
+				29C6CFD7223C0FD200FC321B /* GridLockViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,13 +358,14 @@
 		29C6CF89223C002B00FC321B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = GridLock/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GridLock/Resources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -357,6 +375,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.instil.GridLock;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -365,13 +384,14 @@
 		29C6CF8A223C002B00FC321B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = GridLock/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GridLock/Resources/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -389,6 +409,7 @@
 		29C6CF8C223C002B00FC321B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GridLockTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -406,6 +427,7 @@
 		29C6CF8D223C002B00FC321B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = GridLockTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

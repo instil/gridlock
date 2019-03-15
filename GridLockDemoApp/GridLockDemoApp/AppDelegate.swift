@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import GridLock
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var gridLock: GridLock?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.gridLock = GridLock(appDelegate: self, frame: window?.frame ?? .zero)
         return true
     }
 
