@@ -26,12 +26,22 @@ class ViewController: UIViewController {
             button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
             ])
+        
+//        let leftGestureRecogniser = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(self.handleEgdePan))
+//        gestureRecogniser.edges = .left
+//        self.view.addGestureRecognizer(gestureRecogniser)
     }
     
     @objc func buttonPressed(sender: UIButton) {
         print("hello world")
     }
 
-
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        print("motion in sample app")
+    }
+    
+//    @objc func handleEgdePan(gesture: UIScreenEdgePanGestureRecognizer) {
+//        print(gesture.state)
+//    }
 }
 

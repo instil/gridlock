@@ -20,10 +20,11 @@ public class GridLock {
     
     func createGridLockWindow(frame: CGRect) {
         gridlockWindow = UIWindow(frame: frame)
+        gridlockWindow?.becomeFirstResponder()
         gridlockWindow?.rootViewController = GridLockViewController()
         gridlockWindow?.windowLevel = UIWindow.Level(.greatestFiniteMagnitude)
         gridlockWindow?.makeKeyAndVisible()
-        gridlockWindow?.isUserInteractionEnabled = false
+        gridlockWindow?.isUserInteractionEnabled = true
     }
     
 }
