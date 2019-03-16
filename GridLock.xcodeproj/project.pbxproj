@@ -12,6 +12,7 @@
 		29C6CF85223C002B00FC321B /* GridLock.h in Headers */ = {isa = PBXBuildFile; fileRef = 29C6CF77223C002A00FC321B /* GridLock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29C6CFD2223C0B9400FC321B /* GridLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C6CFD1223C0B9400FC321B /* GridLock.swift */; };
 		29C6CFD7223C0FD200FC321B /* GridLockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C6CFD6223C0FD200FC321B /* GridLockViewController.swift */; };
+		9A1DFDFE223D9BD700698B9D /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1DFDFD223D9BD700698B9D /* Swizzle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		29C6CF84223C002B00FC321B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29C6CFD1223C0B9400FC321B /* GridLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLock.swift; sourceTree = "<group>"; };
 		29C6CFD6223C0FD200FC321B /* GridLockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLockViewController.swift; sourceTree = "<group>"; };
+		9A1DFDFD223D9BD700698B9D /* Swizzle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swizzle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			children = (
 				29C6CFD1223C0B9400FC321B /* GridLock.swift */,
 				29C6CFD6223C0FD200FC321B /* GridLockViewController.swift */,
+				9A1DFDFD223D9BD700698B9D /* Swizzle.swift */,
 				29C6CFD0223C0B6C00FC321B /* Resources */,
 			);
 			path = GridLock;
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A1DFDFE223D9BD700698B9D /* Swizzle.swift in Sources */,
 				29C6CFD2223C0B9400FC321B /* GridLock.swift in Sources */,
 				29C6CFD7223C0FD200FC321B /* GridLockViewController.swift in Sources */,
 			);

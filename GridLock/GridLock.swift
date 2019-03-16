@@ -9,21 +9,51 @@
 import Foundation
 
 public class GridLock {
+    public static var shared = GridLock()
     
-    var gridlockWindow: UIWindow?
-    let appDelegate: UIApplicationDelegate
-    
-    public init(appDelegate: UIApplicationDelegate, frame: CGRect) {
-        self.appDelegate = appDelegate
-        self.createGridLockWindow(frame: frame)
+    public var isActive = false {
+        didSet {
+            isActive ? activate() : deactivate()
+        }
     }
     
-    func createGridLockWindow(frame: CGRect) {
-        gridlockWindow = UIWindow(frame: frame)
-        gridlockWindow?.rootViewController = GridLockViewController()
-        gridlockWindow?.windowLevel = UIWindow.Level(.greatestFiniteMagnitude)
-        gridlockWindow?.makeKeyAndVisible()
-        gridlockWindow?.isUserInteractionEnabled = false
+    let controller = GridLockViewController()
+    
+    private let window: UIWindow
+    private var isConfigured: Bool = false
+    
+    private init() {
+        guard let applicationFrame = UIApplication.shared.windows.first?.frame else {
+            fatalError("Unabled to determine application frame")
+        }
+        
+        window = UIWindow(frame: applicationFrame)
+        window.rootViewController = controller
+        window.windowLevel = UIWindow.Level(.greatestFiniteMagnitude)
+        window.makeKeyAndVisible()
+        window.isUserInteractionEnabled = false
     }
     
+    /// Initlises GridLock
+    public func configure() {
+        assert(_isDebugAssertConfiguration(), "GridLock is intended for use during development builds only")
+        UIApplication.initialiseSwizzleMotionEvent
+        UIApplication.initialiseSwizzleTouchBeganEvent
+        UIApplication.initialiseSwizzleTouchMovedEvent
+        UIApplication.initialiseSwizzleTouchEndedEvent
+        isConfigured = true
+    }
+    
+    /// Activates GridLock - applies an faint white canvas over current view
+    public func activate() {
+        assert(isConfigured, "Configure must be called before activate()")
+        controller.activate()
+    }
+    
+    /// Deactivates GridLock and resets canvas
+    public func deactivate() {
+        assert(isConfigured, "Configure must be called before deactivate()")
+        controller.deactivate()
+    }
+
 }
