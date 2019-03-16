@@ -38,7 +38,7 @@ class GridLockViewController: UIViewController {
             lines.append(view)
             self.view.addSubview(view)
             
-            UIView.animate(withDuration: 0.0, delay: 0.0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
             })
             
@@ -49,8 +49,8 @@ class GridLockViewController: UIViewController {
             
             view.frame.origin.x = location.x
             
-            UIView.animate(withDuration: 0.0, delay: 0.0, options: .curveEaseOut, animations: {
-                view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
             })
         }
     }
