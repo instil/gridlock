@@ -11,22 +11,46 @@ import UIKit
 class GridLockViewController: UIViewController {
     
     var lines: [UIView] = []
+    let lineColor: UIColor
+    let lineWidth: CGFloat
+    
+    init(lineColor: UIColor = .blue, lineWidth: CGFloat = 5.0) {
+        self.lineColor = lineColor
+        self.lineWidth = lineWidth
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
-        self.becomeFirstResponder()
         
-        let gestureRecogniser = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(self.handleEgdePan))
-        gestureRecogniser.edges = .left
-        self.view.addGestureRecognizer(gestureRecogniser)
-        
+        self.view.addGestureRecognizer(buildScreenEdgePanGestureRecognizerFor(edge: .left))
+        self.view.addGestureRecognizer(buildScreenEdgePanGestureRecognizerFor(edge: .right))
     }
     
-    func buildVerticalLine(x: CGFloat) -> UIView {
+    func reset() {
+        lines.forEach { line in
+            line.removeFromSuperview()
+        }
+
+        lines.removeAll()
+    }
+    
+    private func buildScreenEdgePanGestureRecognizerFor(edge: UIRectEdge) -> UIGestureRecognizer {
+        let gestureRecogniser = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(self.handleEgdePan))
+        gestureRecogniser.edges = edge
+        return gestureRecogniser
+    }
+    
+    private func buildVerticalLine(x: CGFloat) -> UIView {
         let height = self.view.bounds.height
-        let verticalLine = UIView(frame: CGRect(x: x, y: 0, width: 5, height: height))
-        verticalLine.backgroundColor = .blue
+        let verticalLine = UIView(frame: CGRect(x: x, y: 0, width: lineWidth, height: height))
+        verticalLine.backgroundColor = self.lineColor
         return verticalLine
     }
     
@@ -37,10 +61,7 @@ class GridLockViewController: UIViewController {
             let view = buildVerticalLine(x: location.x)
             lines.append(view)
             self.view.addSubview(view)
-            
-            UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
-                self.view.layoutIfNeeded()
-            })
+            self.view.layoutIfNeeded()
             
         } else if gesture.state == .changed {
             guard let view = lines.last else {
@@ -48,10 +69,7 @@ class GridLockViewController: UIViewController {
             }
             
             view.frame.origin.x = location.x
-            
-            UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveEaseOut, animations: {
-                self.view.layoutIfNeeded()
-            })
+            self.view.layoutIfNeeded()
         }
     }
     
