@@ -34,10 +34,7 @@ class GridLockViewController: UIViewController {
     }
     
     func reset() {
-        lines.forEach { line in
-            line.removeFromSuperview()
-        }
-
+        lines.forEach { $0.removeFromSuperview() }
         lines.removeAll()
     }
     
@@ -54,22 +51,29 @@ class GridLockViewController: UIViewController {
         return verticalLine
     }
     
+    private func edgePanDidBegin(gestureXPosition: CGFloat) {
+        let view = buildVerticalLine(x: gestureXPosition)
+        lines.append(view)
+        self.view.addSubview(view)
+        self.view.layoutIfNeeded()
+    }
+    
+    private func edgePanDidChange(gestureXPosition: CGFloat) {
+        guard let view = lines.last else {
+            return
+        }
+        
+        view.frame.origin.x = gestureXPosition
+        self.view.layoutIfNeeded()
+    }
+    
     @objc func handleEgdePan(gesture: UIScreenEdgePanGestureRecognizer) {
         let location = gesture.location(in: self.view)
     
         if gesture.state == .began {
-            let view = buildVerticalLine(x: location.x)
-            lines.append(view)
-            self.view.addSubview(view)
-            self.view.layoutIfNeeded()
-            
+            self.edgePanDidBegin(gestureXPosition: location.x)
         } else if gesture.state == .changed {
-            guard let view = lines.last else {
-                return
-            }
-            
-            view.frame.origin.x = location.x
-            self.view.layoutIfNeeded()
+            self.edgePanDidChange(gestureXPosition: location.x)
         }
     }
     

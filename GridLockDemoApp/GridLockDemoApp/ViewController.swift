@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         self.view.backgroundColor = .red
         
         let button = UIButton(frame: .zero)
@@ -26,10 +26,6 @@ class ViewController: UIViewController {
             button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
             ])
-        
-//        let leftGestureRecogniser = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(self.handleEgdePan))
-//        gestureRecogniser.edges = .left
-//        self.view.addGestureRecognizer(gestureRecogniser)
     }
     
     @objc func buttonPressed(sender: UIButton) {
@@ -39,9 +35,5 @@ class ViewController: UIViewController {
     override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         print("motion in sample app")
     }
-    
-//    @objc func handleEgdePan(gesture: UIScreenEdgePanGestureRecognizer) {
-//        print(gesture.state)
-//    }
 }
 

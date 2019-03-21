@@ -49,7 +49,7 @@ class GridLockWindow: UIWindow {
     }
     
     private func toggleGridLock() {
-        self.isGridLockEnabled = self.isGridLockEnabled ? false : true
+        self.isGridLockEnabled = !self.isGridLockEnabled
     }
     
     
