@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         self.view.backgroundColor = .red
         
         let button = UIButton(frame: .zero)
@@ -32,6 +32,8 @@ class ViewController: UIViewController {
         print("hello world")
     }
 
-
+    override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        print("motion in sample app")
+    }
 }
 

@@ -13,7 +13,23 @@
 		29C6CFC6223C054B00FC321B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29C6CFC5223C054B00FC321B /* Assets.xcassets */; };
 		29C6CFC9223C054B00FC321B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29C6CFC7223C054B00FC321B /* LaunchScreen.storyboard */; };
 		29C6CFD9223C10FF00FC321B /* GridLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C6CFD8223C10FF00FC321B /* GridLock.framework */; };
+		29E89E252242791C00375A03 /* GridLock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C6CFD8223C10FF00FC321B /* GridLock.framework */; };
+		29E89E262242791C00375A03 /* GridLock.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 29C6CFD8223C10FF00FC321B /* GridLock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		29E89E272242791C00375A03 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				29E89E262242791C00375A03 /* GridLock.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		29C6CFBB223C054A00FC321B /* GridLockDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridLockDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,6 +48,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				29C6CFD9223C10FF00FC321B /* GridLock.framework in Frameworks */,
+				29E89E252242791C00375A03 /* GridLock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +103,7 @@
 				29C6CFB7223C054A00FC321B /* Sources */,
 				29C6CFB8223C054A00FC321B /* Frameworks */,
 				29C6CFB9223C054A00FC321B /* Resources */,
+				29E89E272242791C00375A03 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
