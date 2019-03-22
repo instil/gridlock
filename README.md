@@ -1,6 +1,6 @@
 
 
-![GridLock](https://github.com/instil/gridlock/raw/drag-gridlines/media/GridLockLogo.png)
+![GridLock](https://github.com/instil/gridlock/raw/master/media/GridLockLogo.png)
 
 
 -----------------
