@@ -15,9 +15,7 @@ class GridLockWindow: UIWindow {
     var isGridLockEnabled: Bool {
         didSet {
             self.isUserInteractionEnabled = isGridLockEnabled
-            if !isGridLockEnabled {
-                self.gridLockViewController.reset()
-            }
+            isGridLockEnabled ? self.gridLockViewController.enable() : self.gridLockViewController.disable()
         }
     }
     

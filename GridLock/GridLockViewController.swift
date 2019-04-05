@@ -8,13 +8,19 @@
 
 import UIKit
 
+enum LineOrientation {
+    case vertical
+    case horizontal
+}
+
 class GridLockViewController: UIViewController {
     
     var lines: [UIView] = []
     let lineColor: UIColor
     let lineWidth: CGFloat
+    var deferredEdgeSystemGestures: UIRectEdge = []
     
-    init(lineColor: UIColor = .blue, lineWidth: CGFloat = 5.0) {
+    init(lineColor: UIColor = .blue, lineWidth: CGFloat = 2.0) {
         self.lineColor = lineColor
         self.lineWidth = lineWidth
         
@@ -31,11 +37,36 @@ class GridLockViewController: UIViewController {
         
         self.view.addGestureRecognizer(buildScreenEdgePanGestureRecognizerFor(edge: .left))
         self.view.addGestureRecognizer(buildScreenEdgePanGestureRecognizerFor(edge: .right))
+        self.view.addGestureRecognizer(buildScreenEdgePanGestureRecognizerFor(edge: .bottom))
+        self.view.addGestureRecognizer(buildScreenEdgePanGestureRecognizerFor(edge: .top))
     }
     
-    func reset() {
+    override var preferredScreenEdgesDeferringSystemGestures: UIRectEdge {
+        return self.deferredEdgeSystemGestures
+    }
+    
+    func disable() {
+        self.removeAllLines()
+        self.enableSystemGestures()
+    }
+    
+    func enable() {
+        self.disableSystemGestures()
+    }
+    
+    private func removeAllLines() {
         lines.forEach { $0.removeFromSuperview() }
         lines.removeAll()
+    }
+    
+    private func enableSystemGestures() {
+        self.deferredEdgeSystemGestures = []
+        self.setNeedsUpdateOfScreenEdgesDeferringSystemGestures()
+    }
+    
+    private func disableSystemGestures() {
+        self.deferredEdgeSystemGestures = [.bottom, .top]
+        self.setNeedsUpdateOfScreenEdgesDeferringSystemGestures()
     }
     
     private func buildScreenEdgePanGestureRecognizerFor(edge: UIRectEdge) -> UIGestureRecognizer {
@@ -51,30 +82,56 @@ class GridLockViewController: UIViewController {
         return verticalLine
     }
     
-    private func edgePanDidBegin(gestureXPosition: CGFloat) {
-        let view = buildVerticalLine(x: gestureXPosition)
+    private func buildHorizontalLine(y: CGFloat) -> UIView {
+        let width = self.view.bounds.width
+        let verticalLine = UIView(frame: CGRect(x: 0, y: y, width: width, height: lineWidth))
+        verticalLine.backgroundColor = self.lineColor
+        return verticalLine
+    }
+    
+    private func edgePanDidBegin(position: CGFloat, orientation: LineOrientation) {
+        let view = (orientation == .vertical) ? buildVerticalLine(x: position) : buildHorizontalLine(y: position)
         lines.append(view)
         self.view.addSubview(view)
         self.view.layoutIfNeeded()
     }
     
-    private func edgePanDidChange(gestureXPosition: CGFloat) {
+    private func edgePanDidChange(position: CGFloat, orientation: LineOrientation) {
         guard let view = lines.last else {
             return
         }
         
-        view.frame.origin.x = gestureXPosition
+        switch orientation {
+        case .vertical:
+            view.frame.origin.x = position
+        default:
+            view.frame.origin.y = position
+        }
+        
         self.view.layoutIfNeeded()
     }
     
-    @objc func handleEgdePan(gesture: UIScreenEdgePanGestureRecognizer) {
+    private func handleEdgePan(gesture: UIScreenEdgePanGestureRecognizer, orientation: LineOrientation) {
         let location = gesture.location(in: self.view)
-    
+        let position = (orientation == .vertical) ? location.x : location.y
+        
         if gesture.state == .began {
-            self.edgePanDidBegin(gestureXPosition: location.x)
+            self.edgePanDidBegin(position: position, orientation: orientation)
         } else if gesture.state == .changed {
-            self.edgePanDidChange(gestureXPosition: location.x)
+            self.edgePanDidChange(position: position, orientation: orientation)
+        } else if gesture.state == .ended {
+            self.setNeedsUpdateOfScreenEdgesDeferringSystemGestures()
         }
     }
+    
+    @objc func handleEgdePan(gesture: UIScreenEdgePanGestureRecognizer) {
+        switch gesture.edges {
+        case .left, .right:
+            self.handleEdgePan(gesture: gesture, orientation: .vertical)
+        default:
+            self.handleEdgePan(gesture: gesture, orientation: .horizontal)
+        }
+    }
+    
     
 }
